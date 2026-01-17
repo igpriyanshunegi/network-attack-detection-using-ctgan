@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# GNCIPL Project 6 - Render Startup Script
-echo "🚀 Starting GNCIPL Project 6..."
+# Cybersecurity Network Attack Detection System - Render Startup Script
+echo "🚀 Starting Cybersecurity Network Attack Detection System"
 
 # Set environment variables
 export STREAMLIT_SERVER_HEADLESS=true
