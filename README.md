@@ -1,122 +1,228 @@
-# Network Attack Detection using Synthetic Data Generation
+# 🛡️ Network Attack Detection using Synthetic Data Generation
 
-This project implements an advanced anomaly detection system for cybersecurity using CTGAN (Conditional Tabular GAN) to generate synthetic attack logs and machine learning models for detection.
+![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat&logo=python&logoColor=white)
+![ML](https://img.shields.io/badge/ML-XGBoost%20%7C%20LightGBM%20%7C%20RF%20%7C%20SVM-orange?style=flat)
+![GAN](https://img.shields.io/badge/GAN-CTGAN-blueviolet?style=flat)
+![Streamlit](https://img.shields.io/badge/App-Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat)
 
-## Project Structure
+> An advanced anomaly detection system for cybersecurity that leverages **CTGAN (Conditional Tabular GAN)** to generate realistic synthetic attack logs and trains multiple machine learning models for real-time network intrusion detection.
+
+---
+
+## 📝 Description
+
+Network intrusion detection is a critical challenge in modern cybersecurity — real-world attack data is often scarce, imbalanced, or sensitive to share. This project tackles that problem head-on by using **generative AI (CTGAN)** to synthesize high-fidelity attack logs that preserve the statistical distributions and feature correlations of real network traffic.
+
+The synthesized data is then used to train and benchmark four anomaly detection models — **Random Forest, XGBoost, LightGBM, and SVM** — evaluated against real-world security metrics like false positive rate and detection latency. The entire pipeline is wrapped in a **Streamlit web application** that enables real-time traffic analysis, attack classification, and confidence scoring — making it usable by security teams without deep ML expertise.
+
+This project covers the full ML lifecycle: exploratory data analysis → synthetic data generation → model training → evaluation → deployment-ready web interface.
+
+---
+
+## 🖥️ App Preview
+![Streamlit App](https://github.com/igpriyanshunegi/network-attack-detection-using-ctgan/blob/main/App%20Screenshot.png)
+
+## 🖥️ Live App
+💡[Deployed Streamlit App Link](https://network-attack-detection-system.onrender.com/)
+
+---
+
+## 📁 Project Structure
 
 ```
-📁 Project/
+📁 Network-Attack-Detection/
+│
 ├── 📓 Notebooks/
-│ ├── 1_EDA.ipynb             # Exploratory Data Analysis
-│ ├── 2_CTGAN_Training.ipynb  # Synthetic Attack Log Generation
-│ ├── 3_Model_Training.ipynb  # Anomaly Detection Models
-│ └── 4_Visualization.ipynb   # Attack Pattern Analysis
+│   ├── 1_EDA.ipynb                    # Exploratory Data Analysis
+│   ├── 2_CTGAN_Training.ipynb         # Synthetic Attack Log Generation
+│   ├── 3_Model_Training.ipynb         # Anomaly Detection Model Training
+│   └── 4_Visualization.ipynb          # Attack Pattern Analysis & Plots
+│
 ├── 📁 Data/
-│ ├── Test_data.csv     # Original dataset
-│ └── Train_data.csv  #Trained dataset
+│   ├── Train_data.csv                 # Training dataset
+│   └── Test_data.csv                  # Testing dataset
+│
 ├── 📁 models/
-│ ├── best_cybersecurity_model.pkl    # Trained detection model
-│ ├── cybersecurity_ctgan_model.pkl    # CTGAN model
-│ ├── cybersecurity_scaler.pkl        # Scaler model
-│ ├── lightgbm_cybersecurity.pkl        # Lightgbm model
-│ ├── preprocessing_objects.pkl        # Preprocessing Object model
-│ ├── random_forest_cybersecurity.pkl     # Random Forest model
-│ ├── svm_cybersecurity.pkl              # SVM model
-│ ├── training_metadata.pkl               # Metadata model
-│ └── xgboost_cybersecurity.pkl             # XGBoost model
+│   ├── best_cybersecurity_model.pkl   # Best performing detection model
+│   ├── cybersecurity_ctgan_model.pkl  # Trained CTGAN generator
+│   ├── cybersecurity_scaler.pkl       # Feature scaler
+│   ├── lightgbm_cybersecurity.pkl     # LightGBM model
+│   ├── preprocessing_objects.pkl      # Preprocessing pipeline
+│   ├── random_forest_cybersecurity.pkl
+│   ├── svm_cybersecurity.pkl
+│   ├── training_metadata.pkl
+│   └── xgboost_cybersecurity.pkl
+│
 ├── 📁 results/
-│ ├── model_performance_comparison.csv 
-│ └── synthetic_cybersecurity_data.csv
-├── app.py                    # Streamlit web application
-├── GNCIPL Project ppt.pptx   # Presentation file of project
-├── GNCIPL Project report file.pdf  # Report file of project
+│   ├── model_performance_comparison.csv
+│   └── synthetic_cybersecurity_data.csv
+│
+├── app.py                             # Streamlit web application
+├── GNCIPL Project ppt.pptx           # Project presentation
+├── GNCIPL Project report file.pdf    # Project report
+├── requirements.txt
 └── README.md
+```
 
+---
 
-## Features
+## ✨ Features
 
-- Comprehensive EDA of network attack patterns
-- Synthetic attack log generation using CTGAN
-- Multiple anomaly detection models:
-  - Random Forest
-  - XGBoost
-  - LightGBM
-  - SVM
-- Interactive visualization dashboard
-- Real-time attack detection web interface
+- **Synthetic Data Generation** — CTGAN produces realistic network attack logs, solving the data scarcity and class imbalance problem
+- **Multi-Model Benchmarking** — four classifiers trained and compared on security-specific metrics
+- **End-to-End Pipeline** — raw data → EDA → synthesis → training → deployment, all in structured notebooks
+- **Real-Time Detection App** — Streamlit interface for live traffic scoring with no ML background required
+- **Interpretable Results** — confidence scores and attack type classification designed for security team readability
 
-## Dataset Description
+---
 
-The project uses the Network Attack Dataset containing:
-- Network traffic features
-- Attack types and patterns
-- Temporal information
-- Protocol information
-- Attack severity levels
+## 📊 Dataset Description
 
-## Models Implemented
+The project uses a **Network Attack Dataset** containing real network traffic records with the following feature groups:
 
-1. **CTGAN for Synthetic Data**
-   - Generates realistic attack patterns
-   - Preserves attack distributions
-   - Maintains feature correlations
+| Feature Group | Examples |
+|---|---|
+| Network Traffic | Packet size, flow duration, bytes per second |
+| Protocol Information | TCP/UDP/ICMP flags, port numbers |
+| Attack Type & Pattern | Attack category, sub-type labels |
+| Temporal Information | Timestamps, inter-arrival times |
+| Attack Severity | Severity level, threat score |
 
-2. **Anomaly Detection Models**
-   - Random Forest Classifier
-   - XGBoost
-   - LightGBM
-   - SVM
-   - Evaluation metrics for security context
+The dataset is split into `Train_data.csv` for model training and `Test_data.csv` for final evaluation.
 
-## Requirements
+---
+
+## 🤖 Models Implemented
+
+### 1. CTGAN — Synthetic Data Generation
+
+CTGAN (Conditional Tabular GAN) is used to generate synthetic attack logs that:
+- Faithfully reproduce real attack distributions
+- Preserve feature correlations across categorical and continuous variables
+- Augment minority attack classes to address class imbalance
+
+### 2. Anomaly Detection Models
+
+| Model | Strengths in Security Context |
+|---|---|
+| **Random Forest** | Robust to noise, strong baseline, interpretable feature importance |
+| **XGBoost** | High accuracy on imbalanced data, fast inference |
+| **LightGBM** | Efficient on large traffic logs, excellent with categorical features |
+| **SVM** | Effective for high-dimensional feature spaces, strong boundary detection |
+
+---
+
+## 📈 Performance Metrics
+
+Models are evaluated using security-context metrics:
+
+| Metric | Description |
+|---|---|
+| Detection Accuracy | Overall correct classification rate |
+| False Positive Rate | Legitimate traffic incorrectly flagged as attacks |
+| False Negative Rate | Attacks that slipped through undetected (critical to minimize) |
+| Detection Latency | Time taken to classify a single traffic sample |
+| Model Confidence Score | Probability output per prediction |
+
+Full comparison results are saved in `results/model_performance_comparison.csv`.
+
+---
+
+## 🗂️ Notebook Workflow
+
+Run the notebooks **in order** for the complete pipeline:
+
+| Step | Notebook | Description |
+|---|---|---|
+| 1️⃣ | `1_EDA.ipynb` | Understand data distributions, attack class balance, feature correlations |
+| 2️⃣ | `2_CTGAN_Training.ipynb` | Train CTGAN and generate synthetic attack logs |
+| 3️⃣ | `3_Model_Training.ipynb` | Train and evaluate all four detection models |
+| 4️⃣ | `4_Visualization.ipynb` | Attack pattern analysis and visual summaries |
+
+---
+
+## 🌐 Web Application
+
+The Streamlit app (`app.py`) provides a real-time detection interface for security teams:
+
+- 📡 **Real-Time Traffic Analysis** — submit network traffic features and get instant predictions
+- 🎯 **Attack Probability Scoring** — probability score output for each attack class
+- 🏷️ **Attack Type Classification** — identifies the specific type of intrusion
+- 📊 **Confidence Metrics** — model certainty displayed per prediction
+- 📉 **Interactive Visualizations** — Plotly-based charts for traffic pattern exploration
+
+---
+
+## ⚙️ Setup & Installation
+
+### Prerequisites
 
 - Python 3.8+
-- pandas
-- numpy
-- scikit-learn
-- sdv (Synthetic Data Vault)
-- streamlit
-- plotly
-- xgboost
-- lightgbm
+- pip
 
-## Setup
+### Installation
 
-1. Clone the repository
-2. Install requirements: `pip install -r requirements.txt`
-3. Run notebooks in sequence
-4. Launch detection app: `streamlit run app.py`
+```bash
+# 1. Clone the repository
+git clone https://github.com/igpriyanshunegi/network-attack-detection-using-ctgan.git
+cd network-attack-detection
 
-## Web Application Features
+# 2. Install dependencies
+pip install -r requirements.txt
 
-- Real-time network traffic analysis
-- Attack probability scoring
-- Attack type classification
-- Confidence metrics
-- Interactive visualizations
+# 3. Run notebooks in sequence (1 → 4)
+jupyter notebook
 
-## Security Considerations
+# 4. Launch the detection web app
+streamlit run app.py
+```
 
-- Model interpretability for security teams
-- False positive/negative analysis
-- Attack pattern evolution tracking
-- Model retraining capabilities
+### Key Dependencies
 
-## Deployment Guidelines
+```
+pandas
+numpy
+scikit-learn
+sdv
+streamlit
+plotly
+xgboost
+lightgbm
+```
 
-1. Regular model updates
-2. Performance monitoring
-3. Alert threshold configuration
-4. Integration with security systems
+---
 
-## Performance Metrics
+## 🔐 Security Considerations
 
-- Detection Accuracy
-- False Positive Rate
-- False Negative Rate
-- Detection Latency
-- Model Confidence Scores
+- **Model Interpretability** — feature importance scores help analysts understand why a traffic sample was flagged
+- **False Positive/Negative Tuning** — adjustable thresholds to balance detection sensitivity vs. alert noise
+- **Attack Pattern Evolution** — modular retraining pipeline to adapt to new and emerging attack vectors
+- **Audit Trail** — saved models and metadata ensure full reproducibility for security audits
 
-## Contributors
+---
 
-- [Priyanshu]
+## 🚀 Deployment Guidelines
+
+1. **Regular Model Updates** — retrain on new traffic data quarterly or after a significant attack event
+2. **Performance Monitoring** — track detection accuracy and false positive rate continuously in production
+3. **Alert Threshold Configuration** — tune confidence score thresholds to match your team's risk tolerance
+4. **SIEM Integration** — connect the app or model API to your existing Security Information and Event Management system
+
+---
+
+## 👥 Contributors
+
+| Name | Role |
+|---|---|
+| **Priyanshu** | Project Lead — Data Analysis, Model Training, App Development |
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+<p align="center">Built with 🔐 to make networks safer</p>
